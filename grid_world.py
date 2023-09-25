@@ -62,6 +62,9 @@ class GridWorld:
             
         print("we gucci")
 
+    def _get_available_actions(self, state: tuple[int, int]) -> list[ACTIONS]:
+        return self.state_space[state]["actions"]
+
     def print_state_space(self) -> None:
         """Print the state space."""
 
