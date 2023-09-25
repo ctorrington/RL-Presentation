@@ -29,7 +29,7 @@ class Agent:
             available_actions = self.grid_world._get_available_actions(state)
             action_probability = 1 / len(available_actions)
             for action in available_actions:
-                action_probability_distribution[action] = 1 / len(available_actions)
+                action_probability_distribution[action] = action_probability
 
         # Other policies. (future work)
         else:
