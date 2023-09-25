@@ -77,6 +77,18 @@ class GridWorld:
         # TODO add the 'wind' affect here later.        
 
         return 1
+    
+    def _get_next_state(self,
+                        state: tuple[int, int],
+                        action: ACTIONS) -> tuple[int, int]:
+        """
+        Return the next state from the given state & action IRRESPECTIVE of
+        the state transition probability.
+        """
+
+        next_state = (0,0)
+
+        return next_state
 
     def print_state_space(self) -> None:
         """Print the state space."""
