@@ -114,6 +114,12 @@ class GridWorld:
         """Return the reward for a given state."""
 
         return self.state_space[state]["reward"]
+    
+    def _get_state_return(self,
+                          state: tuple[int, int]) -> float | int:
+        """Return the expected return for a given state."""
+
+        return self.state_space[state]["return"]
 
     def print_state_space(self) -> None:
         """Print the state space."""
