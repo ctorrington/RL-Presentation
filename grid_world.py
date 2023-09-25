@@ -33,34 +33,42 @@ class GridWorld:
 
                 # Actions of each state.
                 for action in ACTIONS.as_tuple():
-                    match action:
-                        case ACTIONS.UP:
-                            # Check top border.
-                            if row == self.number_of_rows - 1:
-                                continue
-
-                        case ACTIONS.DOWN:
-                            # Check bottom border.
-                            if row == 0:
-                                continue
-
-                        case ACTIONS.LEFT:
-                            # Check left border.
-                            if column == 0:
-                                continue
-
-                        case ACTIONS.RIGHT:
-                            # Check right border.
-                            if column == self.number_of_columns - 1:
-                                continue
-
-                    self.state_space[state]["actions"].append(action.name)
+                    if self._is_valid_action(action, state):
+                        self.state_space[state]["actions"].append(action.name)
 
         # Terminal states rewards.
         for state in self.terminal_states:
             self.state_space[state]["reward"] = 1
             
         print("we gucci")
+
+    def _is_valid_action(self,
+                         action: ACTIONS,
+                         state: tuple[int, int]) -> bool:
+        """Return whether a given action is valid in a given state."""
+
+        match action:
+            case ACTIONS.UP:
+                # Check top border.
+                if state[0] == self.number_of_rows - 1:
+                    return False
+
+            case ACTIONS.DOWN:
+                # Check bottom border.
+                if state[0] == 0:
+                    return False
+
+            case ACTIONS.LEFT:
+                # Check left border.
+                if state[1] == 0:
+                    return False
+
+            case ACTIONS.RIGHT:
+                # Check right border.
+                if state[1] == self.number_of_columns - 1:
+                    return False
+
+        return True
 
     def _get_available_actions(self, state: tuple[int, int]) -> list[ACTIONS]:
         """Return the available actions for the given state."""
