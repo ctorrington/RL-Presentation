@@ -13,10 +13,10 @@ class GridWorld:
         """Initialse the Grid World Environment."""
 
         # State space properties.
-        self.number_of_rows = 5
-        self.number_of_columns = 5
-        self.terminal_states = [(self.number_of_rows - 1,
-                                 self.number_of_columns - 1)]
+        self.number_of_rows = 3
+        self.number_of_columns = 3
+        self.terminal_states = [(int(self.number_of_rows - 1),
+                                 int(self.number_of_columns - 1))]
 
         self.state_space = {}
 
@@ -120,9 +120,25 @@ class GridWorld:
         """Return the expected return for a given state."""
 
         return self.state_space[state]["return"]
+    
+    def _get_terminal_states(self) -> list[tuple[int, int]]:
+        """Return a list of the terminal states of the environment."""
+
+        return self.terminal_states
+    
+    def _set_state_return(self,
+                          state: tuple[int, int],
+                          return_value: float | int) -> None:
+        """Update the state value for the given state with the given value."""
+
+        self.state_space[state]["return"] = return_value
 
     def print_state_space(self) -> None:
         """Print the state space."""
 
         for state in self.state_space:
-            print(f"{state}: {self.state_space[state]}")
+            print(f"state: {state}")
+            print(f"actions: {[action.name for action in self.state_space[state]['actions']]}")
+            print(f"return: {self._get_state_return(state)}")
+            print(f"reward: {self._get_state_reward(state)}")
+            print("")
