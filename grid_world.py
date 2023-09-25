@@ -63,6 +63,7 @@ class GridWorld:
         print("we gucci")
 
     def _get_available_actions(self, state: tuple[int, int]) -> list[ACTIONS]:
+        """Return the available actions for the given state."""
         return self.state_space[state]["actions"]
     
     def _get_state_transition_probability(self,
