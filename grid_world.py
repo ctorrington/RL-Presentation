@@ -108,6 +108,12 @@ class GridWorld:
                 next_state = (state[0], state[1] + 1)
 
         return next_state
+    
+    def _get_state_reward(self,
+                          state: tuple[int, int]) -> float | int:
+        """Return the reward for a given state."""
+
+        return self.state_space[state]["reward"]
 
     def print_state_space(self) -> None:
         """Print the state space."""
