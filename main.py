@@ -2,6 +2,10 @@
 Demonstration project for a finite Markov Decision Process with a Grid World.
 """
 
+from constants import Constants
+
+ACTIONS = Constants.ACTIONS
+
 class GridWorld:
     """Grid World Environment."""
 
@@ -20,8 +24,45 @@ class GridWorld:
                 # Properties of each state.
                 state = (row, column)
                 self.state_space[state] = {
-                    "actions": {},
+                    "actions": [],
                     "return": 0,
                     "reward": 0
                 }
-                
+
+                # Actions of each state.
+                for action in ACTIONS.as_tuple():
+                    match action:
+                        case ACTIONS.UP:
+                            # Check top border.
+                            if row == self.number_of_rows - 1:
+                                continue
+
+                        case ACTIONS.DOWN:
+                            # Check bottom border.
+                            if row == 0:
+                                continue
+
+                        case ACTIONS.LEFT:
+                            # Check left border.
+                            if column == 0:
+                                continue
+
+                        case ACTIONS.RIGHT:
+                            # Check right border.
+                            if column == self.number_of_columns - 1:
+                                continue
+
+                    self.state_space[state]["actions"].append(action.name)
+
+        print("we gucci")
+
+    def print_state_space(self) -> None:
+        """Print the state space."""
+
+        for state in self.state_space:
+            print(f"{state}: {self.state_space[state]}")
+
+if __name__ == "__main__":
+    IN_A_WORLD___ = GridWorld()
+    IN_A_WORLD___.print_state_space()
+    
