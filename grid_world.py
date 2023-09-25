@@ -34,7 +34,7 @@ class GridWorld:
                 # Actions of each state.
                 for action in ACTIONS.as_tuple():
                     if self._is_valid_action(action, state):
-                        self.state_space[state]["actions"].append(action.name)
+                        self.state_space[state]["actions"].append(action)
 
         # Terminal states rewards.
         for state in self.terminal_states:
@@ -94,7 +94,18 @@ class GridWorld:
         the state transition probability.
         """
 
-        next_state = (0,0)
+        match action:
+            case ACTIONS.UP:
+                next_state = (state[0] + 1, state[1])
+
+            case ACTIONS.DOWN:
+                next_state = (state[0] - 1, state[1])
+
+            case ACTIONS.LEFT:
+                next_state = (state[0], state[1] - 1)
+
+            case ACTIONS.RIGHT:
+                next_state = (state[0], state[1] + 1)
 
         return next_state
 
