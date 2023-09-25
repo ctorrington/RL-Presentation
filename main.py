@@ -12,9 +12,11 @@ class GridWorld:
     def __init__(self) -> None:
         """Initialse the Grid World Environment."""
 
-        # State space values.
+        # State space properties.
         self.number_of_rows = 5
         self.number_of_columns = 5
+        self.terminal_states = [(self.number_of_rows - 1,
+                                 self.number_of_columns - 1)]
 
         self.state_space = {}
 
@@ -54,6 +56,10 @@ class GridWorld:
 
                     self.state_space[state]["actions"].append(action.name)
 
+        # Terminal states rewards.
+        for state in self.terminal_states:
+            self.state_space[state]["reward"] = 1
+            
         print("we gucci")
 
     def print_state_space(self) -> None:
