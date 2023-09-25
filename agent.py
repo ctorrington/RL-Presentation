@@ -15,8 +15,10 @@ class Agent:
 
     def _get_action_probability_distribution(self, state: tuple[int, int]) -> dict[ACTIONS,
                                                                       int]:
-        """Return the probability distribution of taken each action
-        available to the given state."""
+        """
+        Return the probability distribution of taken each action
+        available to the given state.
+        """
 
         action_probability_distribution = {}
 

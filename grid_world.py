@@ -64,6 +64,18 @@ class GridWorld:
 
     def _get_available_actions(self, state: tuple[int, int]) -> list[ACTIONS]:
         return self.state_space[state]["actions"]
+    
+    def _get_state_transition_probability(self,
+                                          state: tuple[int, int],
+                                          action: ACTIONS) -> float | int:
+        """
+        Return the probability of transitioning to the next state with the
+        given state & action.
+        """
+
+        # TODO add the 'wind' affect here later.        
+
+        return 1
 
     def print_state_space(self) -> None:
         """Print the state space."""
