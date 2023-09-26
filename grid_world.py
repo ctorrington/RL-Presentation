@@ -23,7 +23,7 @@ class GridWorld:
                                  int(self.number_of_columns - 1))]
         self.obstacles: list[State] = []
         self.number_of_states = self.number_of_rows * self.number_of_columns
-        for obstacle in range(floor(self.number_of_states * 0.3)):
+        for obstacle in range(floor(self.number_of_states * 0.25)):
             x = randint(0, self.number_of_rows)
             y = randint(0, self.number_of_columns)
             obstacle_location: State = (x, y)
@@ -66,6 +66,19 @@ class GridWorld:
     
     def _get_obstacles(self) -> list[State]:
         return self.obstacles
+    
+    def _is_next_state_obstacle(self,
+                               action: ACTIONS,
+                               state: State) -> bool:
+        """
+        Return whether the next state is an obstacle or not depending on the
+        given state & action.
+        """
+        next_states = self._get_next_states(state, action)
+        for next_state in next_states:
+            if next_state in self._get_obstacles():
+                return True
+        return False
 
     def _is_valid_action(self,
                          action: ACTIONS,
@@ -92,6 +105,10 @@ class GridWorld:
                 # Check right border.
                 if state[1] == self.number_of_columns - 1:
                     return False
+                
+        # Check if next state is an obstacle.
+        if self._is_next_state_obstacle(action, state):
+            return False
 
         return True
 

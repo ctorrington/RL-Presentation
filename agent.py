@@ -31,7 +31,11 @@ class Agent:
             # The agent follows a random policy.
             # All actions are chosen equally randomly.
             available_actions = self.grid_world._get_available_actions(state)
-            action_probability = 1 / len(available_actions)
+            # Prevent division by zero error.
+            if len(available_actions) > 0:
+                action_probability = 1 / len(available_actions)
+            else:
+                action_probability = 0
             for action in available_actions:
                 action_probability_distribution[action] = action_probability
 
