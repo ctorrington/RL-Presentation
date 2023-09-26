@@ -4,6 +4,7 @@ from grid_world import GridWorld
 from constants import Constants
 
 ACTIONS = Constants.ACTIONS
+State = Constants.State
 
 class Agent:
     """RL Agent."""
@@ -14,7 +15,7 @@ class Agent:
         self.gamma = 0.9  # Discounting parameter.
         self.theta = 0.001  # Accuracy parameter.
 
-    def _get_action_probability_distribution(self, state: tuple[int, int]) -> dict[ACTIONS, float | int]:
+    def _get_action_probability_distribution(self, state: State) -> dict[ACTIONS, float | int]:
         """
         Return the probability distribution of taken each action
         available to the given state.
@@ -37,7 +38,7 @@ class Agent:
 
         return action_probability_distribution
     
-    def _determine_state_return(self, state: tuple[int, int]) -> float | int:
+    def _determine_state_return(self, state: State) -> float | int:
         """Return the estimated state value for the given state."""
 
         state_value = self.grid_world._get_state_return(state)

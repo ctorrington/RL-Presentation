@@ -5,6 +5,7 @@ Demonstration project for a finite Markov Decision Process with a Grid World.
 from constants import Constants
 
 ACTIONS = Constants.ACTIONS
+State = Constants.State
 
 class GridWorld:
     """Grid World Environment."""
@@ -13,8 +14,8 @@ class GridWorld:
         """Initialse the Grid World Environment."""
 
         # State space properties.
-        self.number_of_rows = 3
-        self.number_of_columns = 3
+        self.number_of_rows = 10
+        self.number_of_columns = 10
         self.terminal_states = [(int(self.number_of_rows - 1),
                                  int(self.number_of_columns - 1))]
 
@@ -44,7 +45,7 @@ class GridWorld:
 
     def _is_valid_action(self,
                          action: ACTIONS,
-                         state: tuple[int, int]) -> bool:
+                         state: State) -> bool:
         """Return whether a given action is valid in a given state."""
 
         match action:
@@ -70,14 +71,14 @@ class GridWorld:
 
         return True
 
-    def _get_available_actions(self, state: tuple[int, int]) -> list[ACTIONS]:
+    def _get_available_actions(self, state: State) -> list[ACTIONS]:
         """Return the available actions for the given state."""
         return self.state_space[state]["actions"]
     
     def _get_state_transition_probability(self,
-                                          state: tuple[int, int],
+                                          state: State,
                                           action: ACTIONS,
-                                          next_state: tuple[int, int]) -> float | int:
+                                          next_state: State) -> float | int:
         """
         Return the probability of transitioning to the next state with the
         given state & action.
@@ -88,8 +89,8 @@ class GridWorld:
         return 1
     
     def _get_next_states(self,
-                        state: tuple[int, int],
-                        action: ACTIONS) -> list[tuple[int, int]]:
+                        state: State,
+                        action: ACTIONS) -> list[State]:
         """
         Return the next state from the given state & action IRRESPECTIVE of
         the state transition probability.
@@ -113,24 +114,24 @@ class GridWorld:
         return [next_state]
     
     def _get_state_reward(self,
-                          state: tuple[int, int]) -> float | int:
+                          state: State) -> float | int:
         """Return the reward for a given state."""
 
         return self.state_space[state]["reward"]
     
     def _get_state_return(self,
-                          state: tuple[int, int]) -> float | int:
+                          state: State) -> float | int:
         """Return the expected return for a given state."""
 
         return self.state_space[state]["return"]
     
-    def _get_terminal_states(self) -> list[tuple[int, int]]:
+    def _get_terminal_states(self) -> list[State]:
         """Return a list of the terminal states of the environment."""
 
         return self.terminal_states
     
     def _set_state_return(self,
-                          state: tuple[int, int],
+                          state: State,
                           return_value: float | int) -> None:
         """Update the state value for the given state with the given value."""
 
