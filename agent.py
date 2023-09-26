@@ -14,7 +14,7 @@ class Agent:
     def __init__(self) -> None:
         self.grid_world = GridWorld()
         self.policy = "random"  # Policy followed by agent.
-        self.gamma = 0.992  # Discounting parameter.
+        self.gamma = 0.9999  # Discounting parameter.
         self.theta = 0.001  # Accuracy parameter.
         self.history: list[GridWorld] = []  # History of environment updates.
 

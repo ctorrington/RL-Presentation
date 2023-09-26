@@ -5,10 +5,8 @@ import matplotlib.animation as mpla
 import numpy as np
 
 class Plotter:
-    def __init__(self, x, y , z) -> None:
-        self.x = x
-        self.y = y
-        self.z = z
+    def __init__(self) -> None:
+        pass
 
     def create_z_axis_data(self, data) -> list[list[int]]:
         """Return the data for the imshow function in the correct format."""
@@ -21,7 +19,13 @@ class Plotter:
             row = []
             for y in range(data.get_number_of_columns()):
                 state = (x, y)
-                row.append(data.state_space[state]["return"])
+                # Check if the state is an obstacle.
+                if state in data._get_obstacles():
+                    # Append a for for no returns if it is an obstacle.
+                    row.append(0)
+                else:
+                    # Otherwise append state return value.
+                    row.append(data.state_space[state]["return"])
             data_matrix.append(row)
 
         return data_matrix
@@ -39,6 +43,6 @@ class Plotter:
             animate,
             frames = len(data),
             interval = 50,
-            repeat = True
+            repeat = False
         )
         plt.show()
