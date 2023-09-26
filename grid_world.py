@@ -5,7 +5,7 @@ Demonstration project for a finite Markov Decision Process with a Grid World.
 from constants import Constants
 
 from math import floor
-from random import randint
+from random import randint, seed
 
 ACTIONS = Constants.ACTIONS
 State = Constants.State
@@ -23,7 +23,8 @@ class GridWorld:
                                  int(self.number_of_columns - 1))]
         self.obstacles: list[State] = []
         self.number_of_states = self.number_of_rows * self.number_of_columns
-        for obstacle in range(floor(self.number_of_states * 0.25)):
+        seed(10)
+        for obstacle in range(floor(self.number_of_states * 0.3)):
             x = randint(0, self.number_of_rows)
             y = randint(0, self.number_of_columns)
             obstacle_location: State = (x, y)
