@@ -9,4 +9,4 @@ if __name__ == "__main__":
     agent.get_environment()
 
     plotter = Plotter()
-    plotter.plot_animation(agent.history)
+    plotter.plot_animation(agent)
