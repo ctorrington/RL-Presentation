@@ -76,7 +76,8 @@ class GridWorld:
     
     def _get_state_transition_probability(self,
                                           state: tuple[int, int],
-                                          action: ACTIONS) -> float | int:
+                                          action: ACTIONS,
+                                          next_state: tuple[int, int]) -> float | int:
         """
         Return the probability of transitioning to the next state with the
         given state & action.
@@ -86,9 +87,9 @@ class GridWorld:
 
         return 1
     
-    def _get_next_state(self,
+    def _get_next_states(self,
                         state: tuple[int, int],
-                        action: ACTIONS) -> tuple[int, int]:
+                        action: ACTIONS) -> list[tuple[int, int]]:
         """
         Return the next state from the given state & action IRRESPECTIVE of
         the state transition probability.
@@ -107,7 +108,9 @@ class GridWorld:
             case ACTIONS.RIGHT:
                 next_state = (state[0], state[1] + 1)
 
-        return next_state
+        # There is currently no uncertainty, the next state is known.
+        # States, plural, & the list is future proofing the function.
+        return [next_state]
     
     def _get_state_reward(self,
                           state: tuple[int, int]) -> float | int:
