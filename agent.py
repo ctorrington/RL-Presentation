@@ -3,6 +3,8 @@
 from grid_world import GridWorld
 from constants import Constants
 
+import copy
+
 ACTIONS = Constants.ACTIONS
 State = Constants.State
 
@@ -12,8 +14,9 @@ class Agent:
     def __init__(self) -> None:
         self.grid_world = GridWorld()
         self.policy = "random"  # Policy followed by agent.
-        self.gamma = 0.99  # Discounting parameter.
+        self.gamma = 0.992  # Discounting parameter.
         self.theta = 0.001  # Accuracy parameter.
+        self.history: list[GridWorld] = []  # History of environment updates.
 
     def _get_action_probability_distribution(self, state: State) -> dict[ACTIONS, float | int]:
         """
@@ -88,6 +91,9 @@ class Agent:
                     self.grid_world._set_state_return(state, self._determine_state_return(state))
                     state_return_difference = abs(previous_state_return - self.grid_world._get_state_return(state))
                     delta = max(delta, state_return_difference)
+
+            # Update the history for plotting.
+            self.history.append(copy.deepcopy(self.grid_world))
                 
             # Check for convergence after updating all the states.
             if delta < self.theta:

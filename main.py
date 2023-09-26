@@ -11,5 +11,5 @@ if __name__ == "__main__":
     plotter = Plotter(agent.grid_world.get_number_of_rows(),
                       agent.grid_world.get_number_of_columns(),
                       agent.grid_world.get_state_space())
-    plotter.plot_data()
+    plotter.plot_animation(agent.history)
     
