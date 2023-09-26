@@ -43,6 +43,12 @@ class GridWorld:
             
         print("we gucci")
 
+    def get_number_of_rows(self) -> int:
+        return self.number_of_rows
+    
+    def get_number_of_columns(self) -> int:
+        return self.number_of_columns
+
     def _is_valid_action(self,
                          action: ACTIONS,
                          state: State) -> bool:
