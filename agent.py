@@ -38,6 +38,11 @@ class Agent:
 
         return action_probability_distribution
     
+    def get_environment(self) -> GridWorld:
+        """Return the environment with values determined by the agent."""
+
+        return self.grid_world
+    
     def _determine_state_return(self, state: State) -> float | int:
         """Return the estimated state value for the given state."""
 
