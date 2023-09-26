@@ -16,7 +16,7 @@ class Plotter:
     def create_z_axis_data(self, data) -> list[list[int]]:
         """Return the data for the imshow function in the correct format."""
 
-        print(data.print_state_space())
+        # print(data.print_state_space())
 
         data_matrix = []
 
@@ -84,7 +84,7 @@ class Plotter:
             plt.gcf(),
             animate,
             frames = len(data),
-            interval = 50,
-            repeat = False
+            interval = 5,
+            repeat = True
         )
         plt.show()
