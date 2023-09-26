@@ -19,7 +19,7 @@ class GridWorld:
         self.terminal_states = [(int(self.number_of_rows - 1),
                                  int(self.number_of_columns - 1))]
 
-        self.state_space = {}
+        self.state_space: dict[State, dict] = {}
 
         # State attributes setup.
         for row in range(self.number_of_rows):
@@ -48,6 +48,9 @@ class GridWorld:
     
     def get_number_of_columns(self) -> int:
         return self.number_of_columns
+    
+    def get_state_space(self) -> dict[State, dict]:
+        return self.state_space
 
     def _is_valid_action(self,
                          action: ACTIONS,
